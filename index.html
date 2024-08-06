@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Age Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+            margin: 0;
+        }
+        .container {
+            text-align: center;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        input {
+            padding: 10px;
+            margin-top: 10px;
+            font-size: 16px;
+        }
+        button {
+            padding: 10px 20px;
+            margin-top: 10px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        p {
+            margin-top: 10px;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Age Calculator</h1>
+        <input type="date" id="birthdate" />
+        <button onclick="calculateAge()">Calculate Age</button>
+        <p id="result"></p>
+    </div>
+
+    <script>
+        function calculateAge() {
+            const birthdateInput = document.getElementById('birthdate').value;
+            if (birthdateInput) {
+                const birthdate = new Date(birthdateInput);
+                const today = new Date();
+                let age = today.getFullYear() - birthdate.getFullYear();
+                const monthDifference = today.getMonth() - birthdate.getMonth();
+
+                if (
+                    monthDifference < 0 ||
+                    (monthDifference === 0 && today.getDate() < birthdate.getDate())
+                ) {
+                    age--;
+                }
+
+                document.getElementById('result').textContent = `You are ${age} years old.`;
+            } else {
+                document.getElementById('result').textContent = 'Please enter your birthdate.';
+            }
+        }
+    </script>
+</body>
+</html>
